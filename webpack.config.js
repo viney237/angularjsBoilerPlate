@@ -3,7 +3,7 @@ const path = require('path');
  const config = {
     entry: './src/index.js',
     output: {
-        path: "/dist",
+        path: path.resolve(__dirname, "dist"),
         filename: 'bundle.js'
     },
     devtool: 'source-map',
@@ -11,11 +11,14 @@ const path = require('path');
         rules: [
             {
                 test: /\.css$/,
-                use: 'style-loader!css-loader'
+                loaders: 'style-loader!css-loader'
             },
             {
                 test: /\.js$/,
-                use: 'babel-loader'
+                loader: 'babel-loader',
+                options: {
+                    presets: ["es2015"]
+                }
             }
         ]
     }
